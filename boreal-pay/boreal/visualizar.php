@@ -1,4 +1,5 @@
 <?php
+define('BOREAL_PUBLIC', true);
 require_once dirname(__FILE__) . '/init.php';
 require_once dirname(__FILE__) . '/bancos/boreal.php';
 
@@ -56,7 +57,30 @@ if ($tipo === 'boleto' && !empty($dados_formatados['pdf_url'])) {
 }
 
 $pix = isset($dados_formatados['pix_copia_cola']) ? $dados_formatados['pix_copia_cola'] : '';
-$qr_url = $pix ? 'https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=' . urlencode($pix) : '';
+$qr_image = '';
+if ($pix) {
+    $possiveis = array(
+        dirname(__FILE__) . '/lib/phpqrcode/qrlib.php',
+        '/admin/scripts/phpqrcode/qrlib.php',
+        '/opt/mk-auth/admin/scripts/phpqrcode/qrlib.php',
+    );
+    $qrlib = null;
+    foreach ($possiveis as $arquivo) {
+        if (file_exists($arquivo)) {
+            $qrlib = $arquivo;
+            break;
+        }
+    }
+    if ($qrlib) {
+        require_once $qrlib;
+        ob_start();
+        QRcode::png($pix, null, QR_ECLEVEL_L, 4);
+        $png = ob_get_clean();
+        if ($png) {
+            $qr_image = 'data:image/png;base64,' . base64_encode($png);
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -75,8 +99,8 @@ $qr_url = $pix ? 'https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=
     <h2>Pagamento via Pix</h2>
     <p>Fatura MK Auth: <?php echo htmlspecialchars($fatura['titulo']); ?></p>
     <p>Valor: R$ <?php echo number_format((float) $fatura['valor'], 2, ',', '.'); ?></p>
-    <?php if ($qr_url): ?>
-        <img src="<?php echo htmlspecialchars($qr_url); ?>" alt="QR Code Pix">
+    <?php if ($qr_image): ?>
+        <img src="<?php echo htmlspecialchars($qr_image); ?>" alt="QR Code Pix">
     <?php endif; ?>
     <div class="pix">
         <strong>Copia e Cola</strong>

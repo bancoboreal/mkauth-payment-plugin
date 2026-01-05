@@ -11,6 +11,15 @@ if (!$data) {
 
 $config = boreal_get_config($mysqli);
 $secret = isset($_SERVER['HTTP_WEBHOOK_SECRET']) ? $_SERVER['HTTP_WEBHOOK_SECRET'] : '';
+if (!$secret && function_exists('apache_request_headers')) {
+    $headers = apache_request_headers();
+    foreach ($headers as $key => $value) {
+        if (strtolower($key) === 'webhook-secret' || strtolower($key) === 'x-webhook-secret') {
+            $secret = $value;
+            break;
+        }
+    }
+}
 if (!empty($config['client_secret']) && $secret !== $config['client_secret']) {
     boreal_log($mysqli, 'erro', 'Assinatura IPN invalida.', array('secret' => $secret));
     boreal_json_response(array('sucesso' => false, 'erro' => 'Assinatura invalida.'), 401);

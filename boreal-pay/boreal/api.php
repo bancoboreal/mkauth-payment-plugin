@@ -7,6 +7,7 @@ $acao = isset($_GET['action']) ? $_GET['action'] : '';
 if ($acao === 'gerar') {
     $titulo = isset($_GET['titulo']) ? (int) $_GET['titulo'] : 0;
     $tipo = isset($_GET['tipo']) ? $_GET['tipo'] : 'pix';
+    $redirect = isset($_GET['redirect']) ? (int) $_GET['redirect'] : 0;
 
     if ($titulo <= 0) {
         boreal_json_response(array('sucesso' => false, 'erro' => 'Titulo invalido.'), 400);
@@ -50,6 +51,14 @@ if ($acao === 'gerar') {
 
     if (!$resultado['sucesso']) {
         boreal_json_response(array('sucesso' => false, 'erro' => $resultado['erro']), 502);
+    }
+
+    if ($redirect === 1 && $tipo === 'boleto') {
+        $dados_formatados = isset($resultado['dados_formatados']) ? $resultado['dados_formatados'] : array();
+        if (!empty($dados_formatados['pdf_url'])) {
+            header('Location: ' . $dados_formatados['pdf_url']);
+            exit;
+        }
     }
 
     boreal_log($mysqli, 'info', 'Pagamento gerado com sucesso.', $resultado);

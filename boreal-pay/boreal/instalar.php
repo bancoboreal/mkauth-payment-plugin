@@ -34,6 +34,7 @@ $sqls[] = "CREATE TABLE IF NOT EXISTS boreal_logs (
     data_criacao datetime,
     PRIMARY KEY (id)
 )";
+$sqls[] = "INSERT INTO boreal_config (id, ativo, baixa_automatica, ambiente) SELECT 1, 0, 1, 'sandbox' WHERE NOT EXISTS (SELECT 1 FROM boreal_config WHERE id = 1)";
 
 $erros = array();
 foreach ($sqls as $sql) {

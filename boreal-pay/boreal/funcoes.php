@@ -55,7 +55,7 @@ function boreal_format_iso($date)
 function boreal_mark_fatura_pago($mysqli, $fatura_id, $valor_pago)
 {
     $recibo = substr(md5((int) $fatura_id), -8);
-    $sql = "UPDATE sis_lanc SET formapag = 'boreal', `status` = 'pago', num_recibos = 1, datapag = NOW(), coletor = 'boreal', valorpag = ?, tarifa_paga = '0', valordesc = '0', recibo = ? WHERE id = ? LIMIT 1";
+    $sql = "UPDATE sis_lanc SET formapag = 'boreal', `status` = 'pago', num_recibos = 1, datapag = NOW(), coletor = 'boreal', valorpag = ?, tarifa_paga = '0', valordesc = '0', recibo = ?, fchequenumero = 'baixado' WHERE id = ? LIMIT 1";
     $stmt = $mysqli->prepare($sql);
     if ($stmt) {
         $stmt->bind_param('dsi', $valor_pago, $recibo, $fatura_id);

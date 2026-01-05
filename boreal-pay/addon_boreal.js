@@ -5,7 +5,9 @@ $('.navbar-start').append(`
         <div class="navbar-dropdown">
             <a href="/admin/clientes.hhvm?tipo=todos" class="navbar-item"><i class="fa fa-plus"></i>&nbsp; Criar faturas</a>
             <div class="dropdown-divider"></div>
-            <a href="/admin/addons/boreal-pay/boreal/instalar.php" class="navbar-item"><i class="fa fa-cog"></i>&nbsp; Instalar/Atualizar</a>
+            <a href="/admin/addons/boreal-pay/boreal/faturas.index.php" class="navbar-item"><i class="fa fa-search"></i>&nbsp; Faturas</a>
+            <a href="/admin/addons/boreal-pay/boreal/configuracoes.php" class="navbar-item"><i class="fa fa-cog"></i>&nbsp; Configura\u00e7\u00f5es</a>
+            <a href="/admin/addons/boreal-pay/boreal/instalar.php" class="navbar-item"><i class="fa fa-plug"></i>&nbsp; Instalar/Atualizar</a>
             <a href="/admin/addons/boreal-pay/boreal/logs.php" class="navbar-item"><i class="fa fa-info-circle"></i>&nbsp; Logs APIs</a>
         </div>
     </div>`);
@@ -33,7 +35,7 @@ function borealGerarPagamento(tituloId, tipo) {
         alert('N\u00e3o foi poss\u00edvel identificar a fatura do MK Auth.');
         return;
     }
-    var url = '/admin/addons/boreal-pay/boreal/api.php?action=gerar&titulo=' + tituloId + '&tipo=' + (tipo || 'pix');
+    var url = '/admin/addons/boreal-pay/boreal/visualizar.php?titulo=' + tituloId + '&tipo=' + (tipo || 'pix');
     window.open(url, '_blank');
 }
 

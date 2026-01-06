@@ -10,47 +10,67 @@ if ($result) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="has-navbar-fixed-top">
 <head>
     <meta charset="utf-8">
-    <title>Boreal Pay - Faturas</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        table { border-collapse: collapse; width: 100%; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-        th { background: #f5f5f5; }
-        .tag { font-size: 12px; padding: 2px 6px; background: #eef; border-radius: 4px; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MK-AUTH :: Boreal Pay - Faturas</title>
+    <link href="../../estilos/mk-auth.css" rel="stylesheet" type="text/css" />
+    <link href="../../estilos/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="../../estilos/bi-icons.css" rel="stylesheet" type="text/css" />
+    <script src="../../scripts/jquery.js"></script>
+    <script src="../../scripts/mk-auth.js"></script>
 </head>
 <body>
-<h2>Faturas Boreal</h2>
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Fatura MK Auth</th>
-            <th>TXID</th>
-            <th>Status</th>
-            <th>Valor</th>
-            <th>Pix</th>
-            <th>Boleto</th>
-            <th>Criado em</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($faturas as $fatura): ?>
-        <tr>
-            <td><?php echo htmlspecialchars($fatura['id']); ?></td>
-            <td><?php echo htmlspecialchars($fatura['fatura_mkauth']); ?></td>
-            <td><?php echo htmlspecialchars($fatura['txid']); ?></td>
-            <td><span class="tag"><?php echo htmlspecialchars($fatura['status']); ?></span></td>
-            <td>R$ <?php echo number_format((float) $fatura['valor'], 2, ',', '.'); ?></td>
-            <td><?php echo $fatura['pix_copia_cola'] ? 'Sim' : 'N\u00e3o'; ?></td>
-            <td><?php if ($fatura['pdf_url']): ?><a href="<?php echo htmlspecialchars($fatura['pdf_url']); ?>" target="_blank">Abrir</a><?php else: ?>-<?php endif; ?></td>
-            <td><?php echo htmlspecialchars($fatura['data_criacao']); ?></td>
-        </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+<?php include('../../topo.php'); ?>
+
+<nav class="breadcrumb has-bullet-separator is-centered" aria-label="breadcrumbs">
+    <ul>
+        <li><a href="#">ADDON</a></li>
+        <li class="is-active"><a href="#" aria-current="page">BOREAL PAY - FATURAS</a></li>
+    </ul>
+</nav>
+
+<section class="section">
+    <div class="container">
+        <div class="box">
+            <h2 class="title is-4">Faturas Boreal</h2>
+            <div class="table-container">
+                <table class="table is-striped is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Fatura MK Auth</th>
+                            <th>TXID</th>
+                            <th>Status</th>
+                            <th>Valor</th>
+                            <th>Pix</th>
+                            <th>Boleto</th>
+                            <th>Criado em</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($faturas as $fatura): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($fatura['id']); ?></td>
+                            <td><?php echo htmlspecialchars($fatura['fatura_mkauth']); ?></td>
+                            <td><?php echo htmlspecialchars($fatura['txid']); ?></td>
+                            <td><span class="tag is-info"><?php echo htmlspecialchars($fatura['status']); ?></span></td>
+                            <td>R$ <?php echo number_format((float) $fatura['valor'], 2, ',', '.'); ?></td>
+                            <td><?php echo $fatura['pix_copia_cola'] ? 'Sim' : 'N\u00e3o'; ?></td>
+                            <td><?php if ($fatura['pdf_url']): ?><a href="<?php echo htmlspecialchars($fatura['pdf_url']); ?>" target="_blank">Abrir</a><?php else: ?>-<?php endif; ?></td>
+                            <td><?php echo htmlspecialchars($fatura['data_criacao']); ?></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<?php include('../../baixo.php'); ?>
+
+<script src="../../menu.js.hhvm"></script>
 </body>
 </html>

@@ -26,49 +26,96 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="has-navbar-fixed-top">
 <head>
     <meta charset="utf-8">
-    <title>Boreal Pay - Configura\u00e7\u00f5es</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        label { display: block; margin-top: 12px; font-weight: bold; }
-        input, select { width: 100%; max-width: 420px; padding: 8px; }
-        .alert { padding: 10px; background: #e8f4ff; border: 1px solid #b6d8ff; margin-bottom: 15px; }
-        .row { margin-bottom: 8px; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MK-AUTH :: Boreal Pay - Configura\u00e7\u00f5es</title>
+    <link href="../../estilos/mk-auth.css" rel="stylesheet" type="text/css" />
+    <link href="../../estilos/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="../../estilos/bi-icons.css" rel="stylesheet" type="text/css" />
+    <script src="../../scripts/jquery.js"></script>
+    <script src="../../scripts/mk-auth.js"></script>
 </head>
 <body>
-<h2>Configura\u00e7\u00f5es Boreal Pay</h2>
+<?php include('../../topo.php'); ?>
 
-<?php if ($mensagem): ?>
-    <div class="alert"><?php echo htmlspecialchars($mensagem); ?></div>
-<?php endif; ?>
+<nav class="breadcrumb has-bullet-separator is-centered" aria-label="breadcrumbs">
+    <ul>
+        <li><a href="#">ADDON</a></li>
+        <li class="is-active"><a href="#" aria-current="page">BOREAL PAY - CONFIGURA\u00c7\u00d5ES</a></li>
+    </ul>
+</nav>
 
-<form method="post">
-    <label>Client ID (Workspace)</label>
-    <input type="text" name="client_id" value="<?php echo htmlspecialchars($config['client_id']); ?>">
+<section class="section">
+    <div class="container">
+        <div class="box">
+            <h2 class="title is-4">Configura\u00e7\u00f5es Boreal Pay</h2>
 
-    <label>Client Secret (Webhook)</label>
-    <input type="text" name="client_secret" value="<?php echo htmlspecialchars($config['client_secret']); ?>">
+            <?php if ($mensagem): ?>
+                <div class="notification is-info"><?php echo htmlspecialchars($mensagem); ?></div>
+            <?php endif; ?>
 
-    <label>Token (Bearer)</label>
-    <input type="text" name="token" value="<?php echo htmlspecialchars($config['token']); ?>">
+            <form method="post">
+                <div class="field">
+                    <label class="label">Client ID (Workspace)</label>
+                    <div class="control">
+                        <input class="input" type="text" name="client_id" value="<?php echo htmlspecialchars($config['client_id']); ?>">
+                    </div>
+                </div>
 
-    <label>Ambiente</label>
-    <select name="ambiente">
-        <option value="sandbox" <?php echo $config['ambiente'] === 'sandbox' ? 'selected' : ''; ?>>Sandbox</option>
-        <option value="producao" <?php echo $config['ambiente'] === 'producao' ? 'selected' : ''; ?>>Produ\u00e7\u00e3o</option>
-    </select>
+                <div class="field">
+                    <label class="label">Client Secret (Webhook)</label>
+                    <div class="control">
+                        <input class="input" type="text" name="client_secret" value="<?php echo htmlspecialchars($config['client_secret']); ?>">
+                    </div>
+                </div>
 
-    <div class="row">
-        <label><input type="checkbox" name="ativo" <?php echo (int) $config['ativo'] === 1 ? 'checked' : ''; ?>> Ativar integra\u00e7\u00e3o</label>
+                <div class="field">
+                    <label class="label">Token (Bearer)</label>
+                    <div class="control">
+                        <input class="input" type="text" name="token" value="<?php echo htmlspecialchars($config['token']); ?>">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Ambiente</label>
+                    <div class="control">
+                        <div class="select is-fullwidth">
+                            <select name="ambiente">
+                                <option value="sandbox" <?php echo $config['ambiente'] === 'sandbox' ? 'selected' : ''; ?>>Sandbox</option>
+                                <option value="producao" <?php echo $config['ambiente'] === 'producao' ? 'selected' : ''; ?>>Produ\u00e7\u00e3o</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="checkbox">
+                        <input type="checkbox" name="ativo" <?php echo (int) $config['ativo'] === 1 ? 'checked' : ''; ?>>
+                        Ativar integra\u00e7\u00e3o
+                    </label>
+                </div>
+
+                <div class="field">
+                    <label class="checkbox">
+                        <input type="checkbox" name="baixa_automatica" <?php echo (int) $config['baixa_automatica'] === 1 ? 'checked' : ''; ?>>
+                        Baixa autom\u00e1tica (cron)
+                    </label>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        <button class="button is-primary" type="submit">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="row">
-        <label><input type="checkbox" name="baixa_automatica" <?php echo (int) $config['baixa_automatica'] === 1 ? 'checked' : ''; ?>> Baixa autom\u00e1tica (cron)</label>
-    </div>
+</section>
 
-    <button type="submit">Salvar</button>
-</form>
+<?php include('../../baixo.php'); ?>
+
+<script src="../../menu.js.hhvm"></script>
 </body>
 </html>

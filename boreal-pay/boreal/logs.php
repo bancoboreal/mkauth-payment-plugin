@@ -15,14 +15,14 @@ if ($result) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MK-AUTH :: Boreal Pay - Logs</title>
-    <link href="../../estilos/mk-auth.css" rel="stylesheet" type="text/css" />
-    <link href="../../estilos/font-awesome.css" rel="stylesheet" type="text/css" />
-    <link href="../../estilos/bi-icons.css" rel="stylesheet" type="text/css" />
-    <script src="../../scripts/jquery.js"></script>
-    <script src="../../scripts/mk-auth.js"></script>
+    <link href="../../../estilos/mk-auth.css" rel="stylesheet" type="text/css" />
+    <link href="../../../estilos/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="../../../estilos/bi-icons.css" rel="stylesheet" type="text/css" />
+    <script src="../../../scripts/jquery.js"></script>
+    <script src="../../../scripts/mk-auth.js"></script>
 </head>
 <body>
-<?php include('../../topo.php'); ?>
+<?php include('../../../topo.php'); ?>
 
 <nav class="breadcrumb has-bullet-separator is-centered" aria-label="breadcrumbs">
     <ul>
@@ -61,8 +61,8 @@ if ($result) {
     </div>
 </section>
 
-<?php include('../../baixo.php'); ?>
+<?php include('../../../baixo.php'); ?>
 
-<script src="../../menu.js.hhvm"></script>
+<script src="../../../menu.js.hhvm"></script>
 </body>
 </html>

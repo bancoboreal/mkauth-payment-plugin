@@ -88,11 +88,11 @@ if ($pix) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MK-AUTH :: Boreal Pay - Pagamento</title>
-    <link href="../../estilos/mk-auth.css" rel="stylesheet" type="text/css" />
-    <link href="../../estilos/font-awesome.css" rel="stylesheet" type="text/css" />
-    <link href="../../estilos/bi-icons.css" rel="stylesheet" type="text/css" />
-    <script src="../../scripts/jquery.js"></script>
-    <script src="../../scripts/mk-auth.js"></script>
+    <link href="../../../estilos/mk-auth.css" rel="stylesheet" type="text/css" />
+    <link href="../../../estilos/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="../../../estilos/bi-icons.css" rel="stylesheet" type="text/css" />
+    <script src="../../../scripts/jquery.js"></script>
+    <script src="../../../scripts/mk-auth.js"></script>
 </head>
 <body>
 <section class="section">

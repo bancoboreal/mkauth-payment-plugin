@@ -86,28 +86,34 @@ if ($pix) {
 <html lang="pt-BR">
 <head>
     <meta charset="utf-8">
-    <title>Boreal Pay - Pagamento</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 30px; text-align: center; }
-        .card { display: inline-block; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
-        .pix { margin-top: 20px; word-break: break-all; }
-        button { padding: 10px 16px; margin-top: 12px; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MK-AUTH :: Boreal Pay - Pagamento</title>
+    <link href="../../estilos/mk-auth.css" rel="stylesheet" type="text/css" />
+    <link href="../../estilos/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="../../estilos/bi-icons.css" rel="stylesheet" type="text/css" />
+    <script src="../../scripts/jquery.js"></script>
+    <script src="../../scripts/mk-auth.js"></script>
 </head>
 <body>
-<div class="card">
-    <h2>Pagamento via Pix</h2>
-    <p>Fatura MK Auth: <?php echo htmlspecialchars($fatura['titulo']); ?></p>
-    <p>Valor: R$ <?php echo number_format((float) $fatura['valor'], 2, ',', '.'); ?></p>
-    <?php if ($qr_image): ?>
-        <img src="<?php echo htmlspecialchars($qr_image); ?>" alt="QR Code Pix">
-    <?php endif; ?>
-    <div class="pix">
-        <strong>Copia e Cola</strong>
-        <div id="pix-code"><?php echo htmlspecialchars($pix); ?></div>
-        <button type="button" onclick="copiarPix()">Copiar</button>
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="box has-text-centered">
+            <h2 class="title is-4">Pagamento via Pix</h2>
+            <p class="subtitle is-6">Fatura MK Auth: <?php echo htmlspecialchars($fatura['titulo']); ?></p>
+            <p class="is-size-5 has-text-weight-bold">Valor: R$ <?php echo number_format((float) $fatura['valor'], 2, ',', '.'); ?></p>
+            <?php if ($qr_image): ?>
+                <figure class="image is-128x128 is-inline-block mt-4">
+                    <img src="<?php echo htmlspecialchars($qr_image); ?>" alt="QR Code Pix">
+                </figure>
+            <?php endif; ?>
+            <div class="mt-4">
+                <p class="has-text-weight-semibold">Copia e Cola</p>
+                <div class="notification is-light" id="pix-code"><?php echo htmlspecialchars($pix); ?></div>
+                <button class="button is-primary" type="button" onclick="copiarPix()">Copiar</button>
+            </div>
+        </div>
     </div>
-</div>
+</section>
 <script>
 function copiarPix() {
     var texto = document.getElementById('pix-code').innerText;
